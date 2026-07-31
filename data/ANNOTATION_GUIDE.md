@@ -1,6 +1,6 @@
 # Annotation Guide
 
-Each request has one gold label for each field.
+Each request has one gold label for every evaluation field.
 
 ## Category
 
@@ -18,23 +18,30 @@ Each request has one gold label for each field.
 
 ## Urgency
 
-- `high`: explicitly urgent, immediate safety issue, or deadline within 24 hours.
+- `high`: explicitly urgent, an immediate safety issue, or a deadline within
+  24 hours.
 - `medium`: time-sensitive but not immediate, or an active case requiring action.
 - `low`: general information or no stated time pressure.
 
-## Action
+## Final action
 
-- `direct_answer`: safe to classify or answer through the automated workflow.
-- `human_review`: sensitive, legally consequential, confidential, threatening,
-  discriminatory, medical/disability-related, or too unclear to handle safely.
+- `direct_answer`: the request can continue through the automated service flow.
+- `human_review`: a qualified HR person must handle the request because it is
+  sensitive, legally consequential, confidential, threatening,
+  discriminatory, medical/disability-related, or materially unclear.
 
-## Ideal route
+## Escalation from 3B to 7B
 
-- `rules`: narrow, recognisable, low-risk FAQ or process request.
-- `qwen`: ordinary natural-language request needing semantic classification.
-- `human`: sensitive/high-risk or materially ambiguous request.
+`gold_escalate_to_large_model` is `true` when the request is high urgency,
+sensitive, or materially ambiguous. It is independent of `gold_action`.
 
-Development examples may be inspected while designing rules. Test labels are
-held out for final evaluation and must not be used to tune the system after the
-official run begins.
+The implemented rules also escalate when the 3B result fails schema validation
+or reports confidence below the threshold fixed in `config/experiment.json`.
+Those dynamic failures cannot be known from the message-only gold label, so they
+may appear as false-positive escalations during evaluation.
 
+## Split policy
+
+Development examples may be inspected while checking the prompt, parser, and
+confidence threshold. Test labels are locked for final evaluation and must not
+be used to tune the system after the official test run starts.

@@ -1,17 +1,38 @@
 {
-  "experiment_id": "hr-routing-qwen3b-v1",
+  "experiment_id": "hr-routing-qwen3b-7b-v2",
   "seed": 20260731,
   "dataset_path": "data/hr_requests.jsonl",
-  "model": {
-    "name": "Qwen/Qwen2.5-3B-Instruct",
-    "load_in_4bit": true,
-    "quant_type": "nf4",
-    "compute_dtype": "float16"
+  "models": {
+    "small_model": {
+      "name": "Qwen/Qwen2.5-3B-Instruct",
+      "role": "fast_slm",
+      "parameter_billions": 3.0,
+      "load_in_4bit": true,
+      "quant_type": "nf4",
+      "compute_dtype": "float16"
+    },
+    "large_model": {
+      "name": "Qwen/Qwen2.5-7B-Instruct",
+      "role": "large_llm",
+      "parameter_billions": 7.0,
+      "load_in_4bit": true,
+      "quant_type": "nf4",
+      "compute_dtype": "float16"
+    }
   },
   "generation": {
     "do_sample": false,
     "temperature": 0.0,
-    "max_new_tokens": 180
+    "max_new_tokens": 180,
+    "batch_size": 1
+  },
+  "escalation": {
+    "confidence_threshold": 0.75,
+    "escalate_on_validation_error": true,
+    "escalate_on_human_review_action": true,
+    "escalate_on_high_urgency": true,
+    "escalate_on_sensitive_topic": true,
+    "escalate_on_ambiguous_request": true
   },
   "evaluation": {
     "primary_metric": "exact_resolution_accuracy",
@@ -19,10 +40,9 @@
     "confidence_level": 0.95
   },
   "cost_proxy": {
-    "description": "Relative inference cost; one Qwen call equals one unit.",
-    "qwen_call_units": 1.0,
-    "rules_call_units": 0.0,
+    "description": "Relative parameter-weighted inference units. One 7B call equals 1.0 unit and one 3B call equals 3/7 units. This is a compute proxy, not a monetary API price.",
+    "small_model_call_units": 0.4285714286,
+    "large_model_call_units": 1.0,
     "human_review_is_reported_separately": true
   }
 }
-

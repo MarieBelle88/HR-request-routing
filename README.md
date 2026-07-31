@@ -1,81 +1,113 @@
 # Evaluating a Tiered Language-Model Routing System for HR Service Requests
 
 This repository contains the reproducible experiment for an Applied AI term
-paper. It compares two ways of processing employee HR requests:
+paper on Topic 16, **Routing and Filtering Layers in Enterprise**.
 
-1. **Uniform-Qwen baseline:** every request is classified by
-   `Qwen/Qwen2.5-3B-Instruct`.
-2. **Tiered system:** safe, highly recognisable FAQs are handled by deterministic
-   rules; sensitive or clearly high-risk cases are routed to human review; the
-   remaining requests are classified by Qwen2.5-3B.
+## Required architecture and baseline
 
-The goal is to test whether routing reduces language-model use and latency while
-maintaining acceptable resolution and escalation accuracy.
+The tiered system follows the course architecture exactly:
+
+```text
+HR request
+→ Tier 1: Qwen2.5-3B-Instruct (fast SLM)
+→ Tier 2: fixed rule-based escalation decision
+→ Tier 3: Qwen2.5-7B-Instruct for escalated requests
+→ final action: direct answer or qualified human HR review
+```
+
+The baseline sends every request directly to the same 7B model. Human review is
+a final operational action; it does not replace the required large-model tier.
 
 ## Research question
 
-Can a tiered routing system process HR service requests more efficiently than
-sending every request to one language model, while maintaining acceptable
-classification accuracy and safe escalation?
+Can a 3B-to-7B tiered routing system reduce use of the larger model and
+inference cost while maintaining resolution accuracy on synthetic HR service
+requests compared with a uniform 7B deployment?
 
 ## Dataset
 
 `data/hr_requests.jsonl` contains 60 synthetic HR requests:
 
-- 15 development records used to check the implementation and freeze rules;
-- 45 held-out test records used for the reported comparison;
-- routine FAQs, ordinary casework, ambiguous messages, and sensitive requests;
-- English, German, and a small number of code-switched stress cases.
+- 15 development records for implementation checks and threshold selection;
+- 45 held-out test records for the reported comparison;
+- routine processes, ordinary casework, explicit urgency, sensitive workplace
+  matters, legal/health/confidentiality cases, and an ambiguous request;
+- mainly English with three German stress cases.
 
-No real employee messages or personal data are included. See the dataset card
-and annotation guide before interpreting the results.
+The data evaluate pretrained models; they are not used to train or fine-tune
+Qwen. `gold_escalate_to_large_model` is separate from the final
+`gold_action = human_review` label. See the dataset card and annotation guide.
 
-## Outputs and metrics
+## Escalation criteria
 
-The experiment records category, urgency, action, escalation reason, route,
-latency, tokens, and model calls. The evaluation reports:
+The 3B output is escalated to 7B when at least one fixed criterion applies:
 
-- category and urgency accuracy;
-- action accuracy and exact resolution accuracy;
-- escalation precision, recall, and F1;
-- unsafe auto-resolution rate;
-- Qwen-call reduction and relative inference-cost reduction;
-- total and per-request latency.
+- JSON parsing or schema validation fails;
+- confidence is below `0.75`;
+- the 3B model requests human review;
+- urgency is high;
+- the message contains a sensitive workplace, health, legal, safety, dismissal,
+  discrimination, or confidentiality issue;
+- the request is materially ambiguous or insufficient.
 
-## Run locally without a model
+Rules make only the escalation decision. They do not classify requests or
+answer FAQs.
+
+## Evaluation
+
+The evaluation reports:
+
+- category, urgency, action, and exact-resolution accuracy for the 3B tier,
+  uniform 7B baseline, and final tiered system;
+- precision, recall, and F1 for 3B-to-7B escalation;
+- precision, recall, F1, and unsafe-auto-resolution rate for human review;
+- 3B and 7B call counts and percentage reduction in 7B calls;
+- relative parameter-weighted compute units;
+- latency, GPU-seconds, peak VRAM, batch size, model names, quantisation, package
+  versions, and GPU information.
+
+## Offline checks
+
+These checks do not download or run either model and do not produce paper
+results:
 
 ```bash
 python scripts/build_dataset.py
 python scripts/verify_dataset.py
 python scripts/offline_checks.py
 pytest -q
-python scripts/run_experiment.py --split test --rules-only-smoke
 ```
 
-## Run the official experiment in Google Colab
+## Official Google Colab experiment
 
-Open `notebooks/HR_Routing_Study_Colab.ipynb`, select a T4 GPU, and run the
-cells in order. The notebook installs the pinned dependencies, runs checks,
-executes the development split, then executes the held-out test comparison.
+Open `notebooks/HR_Routing_Study_Colab.ipynb` in Google Colab, select a T4 GPU,
+and run the cells in order. Both models use 4-bit NF4 weights with FP16 compute
+and are loaded sequentially to fit the 15 GB environment.
 
-Equivalent command-line run:
+Equivalent commands:
 
 ```bash
 python scripts/run_experiment.py --split test --system both --output-dir results
 python scripts/evaluate_results.py \
+  --small-model results/test_small_model.jsonl \
   --baseline results/test_baseline.jsonl \
   --tiered results/test_tiered.jsonl \
   --output-dir results
 ```
 
-The official paper results must come from a genuine GPU run. Smoke outputs are
-marked and are rejected by the evaluator as official evidence.
+With deterministic decoding, the official `both` run reuses each applicable 7B
+baseline output when composing the tiered result for the identical request.
+The evaluation still counts a conceptual 7B call for every escalated tiered
+request. This avoids repeating identical GPU inference while preserving the two
+system comparisons.
 
-## Reproducibility notes
+## Reproducibility and limitations
 
-- Model: Qwen2.5-3B-Instruct, 4-bit NF4 quantisation.
+- Random seed: `20260731`.
 - Decoding: deterministic (`do_sample=false`).
-- Dataset split and rules are fixed in the repository.
-- Runtime package versions and GPU information are saved with the results.
-- Synthetic data limits external validity; results should not be presented as
-  proof of production readiness.
+- Batch size: 1.
+- Models: Qwen2.5-3B-Instruct and Qwen2.5-7B-Instruct.
+- Quantisation: 4-bit NF4 with FP16 computation.
+- Official evidence must be produced on the complete locked 45-record test set.
+- The small, synthetic, single-annotator dataset limits generalisability and
+  does not demonstrate production readiness.

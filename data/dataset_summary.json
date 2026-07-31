@@ -2,10 +2,10 @@
   "records": 60,
   "dev": 15,
   "test": 45,
-  "routes": {
-    "rules": 20,
-    "qwen": 25,
-    "human": 15
+  "escalate_to_large_model": {
+    "true": 17,
+    "false": 43
   },
-  "sha256_hr_requests_jsonl": "5c89188e6f9b527e2d219c21aa13397ae9722d45df7634099fcd40bb6abe9b6c"
+  "human_review_actions": 15,
+  "sha256_hr_requests_jsonl": "cc0b6d15355daef771972f3efa0463b5a2fc17a9f018d0cf396ba9bb6da806b5"
 }

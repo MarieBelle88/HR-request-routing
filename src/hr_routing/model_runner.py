@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import gc
 import json
 import re
 import time
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from typing import Any
 
 from .schema import Prediction
@@ -12,6 +13,7 @@ from .schema import Prediction
 @dataclass
 class ModelMetrics:
     latency_seconds: float
+    gpu_seconds: float
     prompt_tokens: int
     output_tokens: int
     peak_vram_bytes: int | None
@@ -29,44 +31,69 @@ def extract_json(text: str) -> dict:
 
 
 class QwenClassifier:
-    def __init__(self, model_config: dict, generation_config: dict, system_prompt: str):
+    def __init__(
+        self,
+        model_config: dict,
+        generation_config: dict,
+        system_prompt: str,
+        model_role: str,
+    ):
         self.model_config = model_config
         self.generation_config = generation_config
         self.system_prompt = system_prompt
+        self.model_role = model_role
         self.model = None
         self.tokenizer = None
         self.torch = None
+
+    @property
+    def model_name(self) -> str:
+        return str(self.model_config["name"])
 
     def load(self) -> None:
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
         self.torch = torch
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_config["name"])
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         kwargs: dict[str, Any] = {"device_map": "auto"}
+        compute_dtype_name = self.model_config.get("compute_dtype", "float16")
+        compute_dtype = getattr(torch, compute_dtype_name)
         if self.model_config.get("load_in_4bit", True):
             kwargs["quantization_config"] = BitsAndBytesConfig(
                 load_in_4bit=True,
                 bnb_4bit_quant_type=self.model_config.get("quant_type", "nf4"),
-                bnb_4bit_compute_dtype=torch.float16,
+                bnb_4bit_compute_dtype=compute_dtype,
                 bnb_4bit_use_double_quant=True,
             )
         else:
-            kwargs["torch_dtype"] = torch.float16
-        self.model = AutoModelForCausalLM.from_pretrained(self.model_config["name"], **kwargs)
+            kwargs["torch_dtype"] = compute_dtype
+        self.model = AutoModelForCausalLM.from_pretrained(self.model_name, **kwargs)
         self.model.eval()
+
+    def unload(self) -> None:
+        self.model = None
+        self.tokenizer = None
+        gc.collect()
+        if self.torch is not None and self.torch.cuda.is_available():
+            self.torch.cuda.empty_cache()
+            self.torch.cuda.synchronize()
 
     def classify(self, message: str) -> tuple[Prediction, ModelMetrics, str, list[str]]:
         if self.model is None or self.tokenizer is None or self.torch is None:
             raise RuntimeError("Call load() before classify().")
+
         messages = [
             {"role": "system", "content": self.system_prompt},
             {"role": "user", "content": f"HR request:\n{message}"},
         ]
-        prompt = self.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        prompt = self.tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
         encoded = self.tokenizer(prompt, return_tensors="pt")
         device = next(self.model.parameters()).device
         encoded = {key: value.to(device) for key, value in encoded.items()}
+
         if self.torch.cuda.is_available():
             self.torch.cuda.synchronize()
             self.torch.cuda.reset_peak_memory_stats()
@@ -75,12 +102,13 @@ class QwenClassifier:
             generated = self.model.generate(
                 **encoded,
                 max_new_tokens=int(self.generation_config["max_new_tokens"]),
-                do_sample=False,
+                do_sample=bool(self.generation_config.get("do_sample", False)),
                 pad_token_id=self.tokenizer.eos_token_id,
             )
         if self.torch.cuda.is_available():
             self.torch.cuda.synchronize()
         latency = time.perf_counter() - start
+
         new_tokens = generated[0, encoded["input_ids"].shape[-1] :]
         raw = self.tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
         issues: list[str] = []
@@ -95,13 +123,16 @@ class QwenClassifier:
                 escalation_reason="model output could not be validated",
                 confidence=0.0,
             )
+
         metrics = ModelMetrics(
             latency_seconds=latency,
+            gpu_seconds=latency if self.torch.cuda.is_available() else 0.0,
             prompt_tokens=int(encoded["input_ids"].shape[-1]),
             output_tokens=int(new_tokens.shape[-1]),
             peak_vram_bytes=(
-                int(self.torch.cuda.max_memory_allocated()) if self.torch.cuda.is_available() else None
+                int(self.torch.cuda.max_memory_allocated())
+                if self.torch.cuda.is_available()
+                else None
             ),
         )
         return prediction, metrics, raw, issues
-
