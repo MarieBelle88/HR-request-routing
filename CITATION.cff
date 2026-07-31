@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "HR Request Routing Study"
+message: "Please cite this repository if you reuse the experiment."
+type: software
+authors:
+  - family-names: Khaddage
+    given-names: Marie-Belle
+date-released: 2026-07-31
+license: MIT
+version: 1.0.0
+
