@@ -1,0 +1,45 @@
+{"request_id": "HR002", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 0.0016571129999647383}
+{"request_id": "HR003", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 3.094499993494537e-05}
+{"request_id": "HR004", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.0995000113543938e-05}
+{"request_id": "HR006", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.1687999833375216e-05}
+{"request_id": "HR007", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.3191999844129896e-05}
+{"request_id": "HR008", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 1.8519999912314233e-05}
+{"request_id": "HR010", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 3.556299998308532e-05}
+{"request_id": "HR011", "split": "test", "escalate_to_large_model": true, "reasons": ["high_urgency"], "routing_latency_seconds": 2.322999989701202e-05}
+{"request_id": "HR012", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 1.9901000086974818e-05}
+{"request_id": "HR014", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 3.327499985061877e-05}
+{"request_id": "HR015", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 1.8878999981097877e-05}
+{"request_id": "HR016", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.0274000007702853e-05}
+{"request_id": "HR018", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 1.8468999996912316e-05}
+{"request_id": "HR019", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 1.905799990709056e-05}
+{"request_id": "HR020", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 1.6433999917353503e-05}
+{"request_id": "HR022", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.9523999955927138e-05}
+{"request_id": "HR023", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.7756999998018728e-05}
+{"request_id": "HR024", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 3.09770000512799e-05}
+{"request_id": "HR026", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.973999994537735e-05}
+{"request_id": "HR027", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 3.066700014642265e-05}
+{"request_id": "HR028", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.7201999955650535e-05}
+{"request_id": "HR030", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.855000002455199e-05}
+{"request_id": "HR031", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.9254000082801213e-05}
+{"request_id": "HR032", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 3.0207000008886098e-05}
+{"request_id": "HR034", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 3.102799996668182e-05}
+{"request_id": "HR035", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 3.1715999966763775e-05}
+{"request_id": "HR036", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 3.0210999966584495e-05}
+{"request_id": "HR038", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.785200013022404e-05}
+{"request_id": "HR039", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 3.1637999882150325e-05}
+{"request_id": "HR040", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.8890000066894572e-05}
+{"request_id": "HR042", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.9608999966512783e-05}
+{"request_id": "HR043", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 2.7396999939810485e-05}
+{"request_id": "HR044", "split": "test", "escalate_to_large_model": false, "reasons": [], "routing_latency_seconds": 3.741099999388098e-05}
+{"request_id": "HR046", "split": "test", "escalate_to_large_model": true, "reasons": ["small_model_requested_human_review", "high_urgency", "sensitive_workplace_complaint"], "routing_latency_seconds": 4.378500011625874e-05}
+{"request_id": "HR047", "split": "test", "escalate_to_large_model": true, "reasons": ["small_model_requested_human_review", "high_urgency", "possible_discrimination"], "routing_latency_seconds": 2.5751000066520646e-05}
+{"request_id": "HR048", "split": "test", "escalate_to_large_model": true, "reasons": ["small_model_requested_human_review", "high_urgency", "possible_safety_risk"], "routing_latency_seconds": 2.7999999929306796e-05}
+{"request_id": "HR050", "split": "test", "escalate_to_large_model": true, "reasons": ["possible_legal_dispute"], "routing_latency_seconds": 3.1213000056595774e-05}
+{"request_id": "HR051", "split": "test", "escalate_to_large_model": true, "reasons": ["small_model_validation_error", "small_model_low_confidence", "small_model_requested_human_review", "dismissal_dispute"], "routing_latency_seconds": 3.475900007288146e-05}
+{"request_id": "HR052", "split": "test", "escalate_to_large_model": true, "reasons": ["small_model_requested_human_review", "another_employee_confidential_data"], "routing_latency_seconds": 3.028599985555047e-05}
+{"request_id": "HR054", "split": "test", "escalate_to_large_model": true, "reasons": ["sensitive_health_or_accommodation_matter"], "routing_latency_seconds": 2.784499997687817e-05}
+{"request_id": "HR055", "split": "test", "escalate_to_large_model": true, "reasons": ["small_model_requested_human_review", "high_urgency", "possible_legal_dispute"], "routing_latency_seconds": 2.8135000093243434e-05}
+{"request_id": "HR056", "split": "test", "escalate_to_large_model": true, "reasons": ["small_model_requested_human_review", "another_employee_confidential_data"], "routing_latency_seconds": 3.036499992958852e-05}
+{"request_id": "HR058", "split": "test", "escalate_to_large_model": true, "reasons": ["small_model_requested_human_review", "sensitive_health_or_accommodation_matter"], "routing_latency_seconds": 3.387999981896428e-05}
+{"request_id": "HR059", "split": "test", "escalate_to_large_model": true, "reasons": ["ambiguous_or_insufficient_request"], "routing_latency_seconds": 1.0481000117579242e-05}
+{"request_id": "HR060", "split": "test", "escalate_to_large_model": true, "reasons": ["small_model_requested_human_review", "high_urgency", "sensitive_workplace_complaint"], "routing_latency_seconds": 2.682299987100123e-05}

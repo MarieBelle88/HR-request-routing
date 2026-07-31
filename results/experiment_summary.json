@@ -1,0 +1,116 @@
+{
+  "experiment_id": "hr-routing-qwen3b-7b-v2",
+  "split": "test",
+  "official_results": true,
+  "small_model_tier": {
+    "n": 45,
+    "category_accuracy": 0.5555555555555556,
+    "urgency_accuracy": 0.6222222222222222,
+    "action_accuracy": 0.9333333333333333,
+    "exact_resolution_accuracy": 0.37777777777777777,
+    "exact_resolution_accuracy_95ci": [
+      0.24444444444444444,
+      0.5111111111111111
+    ],
+    "human_review_precision": 1.0,
+    "human_review_recall": 0.75,
+    "human_review_f1": 0.8571428571428571,
+    "unsafe_auto_resolution_rate": 0.06666666666666667,
+    "large_model_escalation_precision": null,
+    "large_model_escalation_recall": null,
+    "large_model_escalation_f1": null,
+    "exact_resolution_accuracy_by_route": {
+      "small_model": 0.37777777777777777
+    },
+    "small_model_calls": 45,
+    "small_model_call_rate": 1.0,
+    "large_model_calls": 0,
+    "large_model_call_rate": 0.0,
+    "total_latency_seconds": 170.2951979680006,
+    "mean_latency_seconds": 3.7843377326222356,
+    "total_gpu_seconds": 170.2951979680006,
+    "mean_gpu_seconds": 3.7843377326222356,
+    "peak_vram_bytes": 2132131328,
+    "route_counts": {
+      "small_model": 45
+    }
+  },
+  "uniform_large_model_baseline": {
+    "n": 45,
+    "category_accuracy": 0.6666666666666666,
+    "urgency_accuracy": 0.6666666666666666,
+    "action_accuracy": 0.8888888888888888,
+    "exact_resolution_accuracy": 0.4444444444444444,
+    "exact_resolution_accuracy_95ci": [
+      0.3111111111111111,
+      0.5777777777777777
+    ],
+    "human_review_precision": 0.7692307692307693,
+    "human_review_recall": 0.8333333333333334,
+    "human_review_f1": 0.8,
+    "unsafe_auto_resolution_rate": 0.044444444444444446,
+    "large_model_escalation_precision": null,
+    "large_model_escalation_recall": null,
+    "large_model_escalation_f1": null,
+    "exact_resolution_accuracy_by_route": {
+      "large_model": 0.4444444444444444
+    },
+    "small_model_calls": 0,
+    "small_model_call_rate": 0.0,
+    "large_model_calls": 45,
+    "large_model_call_rate": 1.0,
+    "total_latency_seconds": 156.49390681400132,
+    "mean_latency_seconds": 3.477642373644474,
+    "total_gpu_seconds": 156.49390681400132,
+    "mean_gpu_seconds": 3.477642373644474,
+    "peak_vram_bytes": 5784086016,
+    "route_counts": {
+      "large_model": 45
+    }
+  },
+  "tiered_system": {
+    "n": 45,
+    "category_accuracy": 0.6,
+    "urgency_accuracy": 0.5555555555555556,
+    "action_accuracy": 0.9555555555555556,
+    "exact_resolution_accuracy": 0.35555555555555557,
+    "exact_resolution_accuracy_95ci": [
+      0.2222222222222222,
+      0.4888888888888889
+    ],
+    "human_review_precision": 1.0,
+    "human_review_recall": 0.8333333333333334,
+    "human_review_f1": 0.9090909090909091,
+    "unsafe_auto_resolution_rate": 0.044444444444444446,
+    "large_model_escalation_precision": 1.0,
+    "large_model_escalation_recall": 0.9285714285714286,
+    "large_model_escalation_f1": 0.962962962962963,
+    "exact_resolution_accuracy_by_route": {
+      "large_model": 0.15384615384615385,
+      "small_model": 0.4375
+    },
+    "small_model_calls": 45,
+    "small_model_call_rate": 1.0,
+    "large_model_calls": 13,
+    "large_model_call_rate": 0.28888888888888886,
+    "total_latency_seconds": 219.3250184280007,
+    "mean_latency_seconds": 4.873889298400016,
+    "total_gpu_seconds": 219.32214993900152,
+    "mean_gpu_seconds": 4.8738255542000335,
+    "peak_vram_bytes": 5783684608,
+    "route_counts": {
+      "small_model": 32,
+      "large_model": 13
+    }
+  },
+  "comparison": {
+    "large_model_call_reduction": 0.7111111111111111,
+    "baseline_cost_proxy_units": 45.0,
+    "tiered_cost_proxy_units": 32.285714287000005,
+    "relative_cost_proxy_reduction": 0.28253968251111106,
+    "gpu_seconds_reduction": -0.4014740535532406,
+    "latency_reduction": -0.4014923832700812,
+    "exact_resolution_accuracy_difference": -0.08888888888888885
+  },
+  "cost_note": "Relative parameter-weighted inference units. One 7B call equals 1.0 unit and one 3B call equals 3/7 units. This is a compute proxy, not a monetary API price."
+}
