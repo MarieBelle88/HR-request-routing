@@ -1,0 +1,61 @@
+request_id,message,language,split,gold_category,gold_urgency,gold_action,gold_ideal_route,gold_escalation_reason,source_type,annotation_status
+HR001,Where can I download my payslip?,en,dev,payroll,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR002,How do I report sick leave?,en,test,leave,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR003,How do I check my leave balance?,en,test,leave,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR004,How do I update my home address?,en,test,personal_data,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR005,Where is the remote-work policy?,en,dev,policy,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR006,Where do I find the mandatory training?,en,test,training,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR007,What documents should I bring on my first day?,en,test,onboarding,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR008,Where do I return my laptop?,en,test,offboarding,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR009,Where can I find information about the pension plan?,en,dev,benefits,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR010,How do I view my benefits portal?,en,test,benefits,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR011,Where do I find my payslip? It is urgent today.,en,test,payroll,high,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR012,Where do I submit a sick note tomorrow?,en,test,leave,medium,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR013,Where can I see my remaining vacation days?,en,dev,leave,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR014,Where can I change my bank details today?,en,test,personal_data,high,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR015,Where can I read the travel policy?,en,test,policy,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR016,How do I access the compliance course?,en,test,training,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR017,Where is the onboarding checklist?,en,dev,onboarding,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR018,How do I return company equipment?,en,test,offboarding,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR019,How do I update my address this week?,en,test,personal_data,medium,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR020,How do I access my payslip?,en,test,payroll,low,direct_answer,rules,,synthetic_controlled,gold_v1_single_reviewer
+HR021,My overtime from June is missing from this month's salary. Can payroll check it before Friday?,en,dev,payroll,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR022,I booked three holiday days but the portal still shows the old balance.,en,test,leave,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR023,My public transport allowance disappeared after I changed departments.,en,test,benefits,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR024,I start next Monday and have not received login instructions or an office location.,en,test,onboarding,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR025,My final working day is next week. Please confirm when unused leave will be paid.,en,dev,offboarding,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR026,Could someone explain whether the weekend hours in my new contract are optional?,en,test,contract,low,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR027,I need a copy of the expense rule for client dinners because my claim was returned.,en,test,policy,low,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR028,The security course shows incomplete even though I passed it yesterday.,en,test,training,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR029,My surname changed and I need it corrected on payroll and the employee directory.,en,dev,personal_data,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR030,Can unused annual leave be carried into January if my manager approves it?,en,test,leave,low,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR031,I received two different net salary amounts in the portal and bank transfer.,en,test,payroll,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR032,"Does the company health insurance also cover dependants, and when can I enrol them?",en,test,benefits,low,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR033,"Bitte bestätigt, ob ich für meinen ersten Arbeitstag noch ein Führungszeugnis brauche.",de,dev,onboarding,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR034,I resigned yesterday. Who confirms my remaining notice period and final handover date?,en,test,offboarding,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR035,My fixed-term agreement ends in six weeks. When should the renewal decision be communicated?,en,test,contract,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR036,The flex-time document and my team's instructions give different core working hours.,en,test,policy,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR037,"My manager asked me to complete a course, but the learning portal says I am not eligible.",en,dev,training,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR038,Please correct my emergency contact; the portal saves the old phone number.,en,test,personal_data,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR039,I requested parental leave two weeks ago and need to know whether the documents were received.,en,test,leave,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR040,The reimbursement was approved but has not appeared in this month's payment.,en,test,payroll,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR041,"Kann ich meine betriebliche Altersvorsorge ändern, nachdem die Anmeldefrist abgelaufen ist?",de,dev,benefits,low,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR042,"I begin remotely next week, but I only received the office-based onboarding schedule.",en,test,onboarding,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR043,Do I need to return my access card before or on my final day?,en,test,offboarding,low,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR044,My offer letter says 35 hours while the contract draft says 40. Which document should be corrected?,en,test,contract,medium,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR045,"The leave policy was updated, but the German translation still shows the previous notice period.",en,dev,policy,low,direct_answer,qwen,,synthetic_controlled,gold_v1_single_reviewer
+HR046,My manager keeps making sexual comments and I need HR to intervene.,en,test,workplace_issue,medium,human_review,human,harassment or bullying allegation,synthetic_controlled,gold_v1_single_reviewer
+HR047,I believe I was denied promotion because of my religion.,en,test,workplace_issue,medium,human_review,human,possible discrimination,synthetic_controlled,gold_v1_single_reviewer
+HR048,A colleague threatened to hit me before my shift today. I feel unsafe.,en,test,workplace_issue,high,human_review,human,possible immediate safety risk,synthetic_controlled,gold_v1_single_reviewer
+HR049,I need different working hours because of a medical condition. What proof must I send?,en,dev,contract,medium,human_review,human,sensitive health or accommodation matter,synthetic_controlled,gold_v1_single_reviewer
+HR050,My lawyer says the overtime clause may be illegal and I want the company to respond.,en,test,contract,medium,human_review,human,possible legal dispute,synthetic_controlled,gold_v1_single_reviewer
+HR051,I was fired unfairly and want to contest my termination immediately.,en,test,offboarding,high,human_review,human,dismissal dispute,synthetic_controlled,gold_v1_single_reviewer
+HR052,Send me my coworker's salary details because we have the same role.,en,test,personal_data,medium,human_review,human,request for another employee's confidential data,synthetic_controlled,gold_v1_single_reviewer
+HR053,My supervisor repeatedly mocks my accent in team meetings.,en,dev,workplace_issue,medium,human_review,human,harassment or bullying allegation,synthetic_controlled,gold_v1_single_reviewer
+HR054,I am pregnant and need to discuss changes to duties and working hours.,en,test,contract,medium,human_review,human,sensitive health or accommodation matter,synthetic_controlled,gold_v1_single_reviewer
+HR055,"If this is not fixed, I will take legal action against the company.",en,test,contract,medium,human_review,human,possible legal dispute,synthetic_controlled,gold_v1_single_reviewer
+HR056,Can you show me another employee's medical file? I am covering their work.,en,test,personal_data,medium,human_review,human,request for another employee's confidential data,synthetic_controlled,gold_v1_single_reviewer
+HR057,Mein Vorgesetzter macht rassistische Witze über mich. Ich möchte das melden.,de,dev,workplace_issue,medium,human_review,human,possible discrimination,synthetic_controlled,gold_v1_single_reviewer
+HR058,"I need an accommodation for my disability, but I do not want my manager to see my diagnosis.",en,test,contract,medium,human_review,human,sensitive health or accommodation matter,synthetic_controlled,gold_v1_single_reviewer
+HR059,Help,en,test,other,low,human_review,human,insufficient information,synthetic_controlled,gold_v1_single_reviewer
+HR060,My manager touched me inappropriately at the work event yesterday.,en,test,workplace_issue,medium,human_review,human,harassment or bullying allegation,synthetic_controlled,gold_v1_single_reviewer
